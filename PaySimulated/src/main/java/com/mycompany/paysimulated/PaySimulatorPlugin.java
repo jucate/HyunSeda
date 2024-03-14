@@ -6,16 +6,47 @@ package com.mycompany.paysimulated;
 
 import com.mycompany.payhyunseda.IPaymentPlugin;
 import com.mycompany.payhyunseda.Payment;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 /**
  *
  * @author USUARIO
  */
 public class PaySimulatorPlugin implements IPaymentPlugin{
-
+private double saldo;
+    private int codigo;
     @Override
     public boolean payProcessing(Payment payment) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        GetFileInfo(payment);
+        if(payment.isPayValue()){
+            return true;
+        }
+        return false;
+    }
+    public void GetFileInfo(Payment payment){
+        File archivo = new File("Pago.txt");
+        List<String> listData = new ArrayList<>();
+        if(archivo.exists()){
+            try {
+                Scanner myReader = new Scanner(archivo);
+                while (myReader.hasNextLine()) {                    
+                    String data = myReader.nextLine();
+                    listData.add(data);
+                }
+            } catch (FileNotFoundException ex) {
+                System.out.println("Un error ocurrio");
+                ex.printStackTrace();
+            }
+        }
+        else{
+            System.out.println("El archivo no existe");
+        }
+        if (!listData.isEmpty()) {
+        }
     }
     
 }
