@@ -8,10 +8,14 @@ package co.com.hyunseda.market.presentation;
 import co.com.hyunseda.market.dataAccess.Product;
 import co.com.hyunseda.market.presentation.observer.IOberver;
 import co.com.hyunseda.market.service.ItemCompra;
+import co.com.hyunseda.market.service.PayService;
 import co.com.hyunseda.market.service.Service;
+import com.mycompany.payhyunseda.Payment;
 import java.util.ArrayList;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -20,6 +24,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class GUICarrito extends javax.swing.JFrame implements IOberver{
     private Service service;
+    private PayService payService;
     List<ItemCompra> listProducts = new ArrayList<>();
     /**
      * Creates new form GUIProductsFind
@@ -28,7 +33,7 @@ public class GUICarrito extends javax.swing.JFrame implements IOberver{
         initComponents();
         initializeTable();
         this.service = service;
-        
+        this.payService = new PayService();
         setLocationRelativeTo(null); //centrar al ventana
     }
     public void setListProducts(List<ItemCompra> list){
@@ -93,6 +98,7 @@ public class GUICarrito extends javax.swing.JFrame implements IOberver{
         txtSearch = new javax.swing.JTextField();
         btnAgregar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
+        btnPagar = new javax.swing.JButton();
         btnClose = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -145,6 +151,14 @@ public class GUICarrito extends javax.swing.JFrame implements IOberver{
         });
         jPanel1.add(btnCancelar);
 
+        btnPagar.setText("Pagar");
+        btnPagar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPagarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnPagar);
+
         btnClose.setText("Cerrar");
         btnClose.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -188,6 +202,20 @@ public class GUICarrito extends javax.swing.JFrame implements IOberver{
         }
         update();
     }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void btnPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPagarActionPerformed
+        // TODO add your handling code here:
+        for (int i = 0; i < listProducts.size(); i++) {
+            if (tblProducts.isRowSelected(i)) {
+                try {
+                    //service.findProductById((Long)tblProducts.getValueAt(i, 0));
+                    payService.pay(new Payment());
+                } catch (Exception ex) {
+                    Logger.getLogger(GUICarrito.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }    
+    }//GEN-LAST:event_btnPagarActionPerformed
     
 
 
@@ -195,6 +223,7 @@ public class GUICarrito extends javax.swing.JFrame implements IOberver{
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnClose;
+    private javax.swing.JButton btnPagar;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
