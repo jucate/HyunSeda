@@ -1,8 +1,11 @@
 package com.hyunseda.payhyunseda;
 public class Payment {
-    private boolean payValue;
+    private boolean payValue = false;
     private int idClient;
     private int idPayDocument;
+
+    public Payment() {
+    }
 
     public boolean isPayValue() {
         return payValue;

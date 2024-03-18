@@ -17,10 +17,10 @@ public class PaymentStatus extends javax.swing.JFrame {
     public PaymentStatus(boolean Value) {
         initComponents();
         if (Value==true) {
-            this.txtStatusPane.setText("Pago Realizado");
+            this.txtStatusPane.setText("Pago realizado");
         }
         else{
-            this.txtStatusPane.setText("Pago no realizado");
+            this.txtStatusPane.setText("Pago no Realizado");
         }
     }
 

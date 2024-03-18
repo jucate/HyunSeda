@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.hyunseda.paysimulated;
 
 import com.hyunseda.payhyunseda.IPaymentPlugin;
@@ -17,7 +13,7 @@ import java.util.Scanner;
  * @author USUARIO
  */
 public class PaySimulatorPlugin implements IPaymentPlugin{
-    private double saldo = 10000;
+    private double saldo = -1.0;
     private int codigo = 1;
 
     public double getSaldo() {
@@ -38,13 +34,12 @@ public class PaySimulatorPlugin implements IPaymentPlugin{
     @Override
     public boolean payProcessing(Payment payment) {
         //GetFileInfo(payment);
-        if (saldo>0) {
+        if (getSaldo()>0.0) {
             payment.setPayValue(true);
+            return payment.isPayValue();
+        } else {
+            return payment.isPayValue();
         }
-        else{
-            payment.setPayValue(false);
-        }
-        return payment.isPayValue();
     }
     public void GetFileInfo(Payment payment){
         File archivo = new File("Pago.txt");
