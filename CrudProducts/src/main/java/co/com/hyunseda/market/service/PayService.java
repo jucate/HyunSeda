@@ -1,21 +1,16 @@
 package co.com.hyunseda.market.service;
 
 import co.com.hyunseda.market.dataAccess.PluginManager;
-import com.mycompany.payhyunseda.IPaymentPlugin;
-import com.mycompany.payhyunseda.Payment;
-
-/**
- *
- * @author IngSis
- */
+import com.hyunseda.payhyunseda.IPaymentPlugin;
+import com.hyunseda.payhyunseda.Payment;
 public class PayService {
     
-    public boolean pay(Payment payment) throws Exception {    
-        int idPaymentDocument = payment.getIdPayDocument();
+    public boolean pay(Payment payment) throws Exception {  
         PluginManager manager = PluginManager.getInstance();
-        IPaymentPlugin payPlugin = manager.getPublisherPlugin("payment.getIdPayDocument()");
+        IPaymentPlugin payPlugin;
+        payPlugin = manager.getPublisherPlugin("paymentMethod");
         if (payPlugin == null) {
-            throw new Exception("No hay un plugin disponible para el país indicado: " + idPaymentDocument);
+            throw new Exception("No hay un plugin disponible para el método de pago especificado");
         }
         return payPlugin.payProcessing(payment);
     }

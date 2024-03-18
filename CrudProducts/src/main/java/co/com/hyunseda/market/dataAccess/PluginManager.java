@@ -1,6 +1,6 @@
 package co.com.hyunseda.market.dataAccess;
 
-import com.mycompany.payhyunseda.IPaymentPlugin;
+import com.hyunseda.payhyunseda.IPaymentPlugin;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -11,7 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 public class PluginManager {
 
-    private static final String FILE_NAME = "plugin.properties";
+    private static String FILE_NAME = "plugin.properties";
     private static PluginManager instance;
     
     private Properties pluginProperties;

@@ -10,7 +10,7 @@ import co.com.hyunseda.market.presentation.observer.IOberver;
 import co.com.hyunseda.market.service.ItemCompra;
 import co.com.hyunseda.market.service.PayService;
 import co.com.hyunseda.market.service.Service;
-import com.mycompany.payhyunseda.Payment;
+import com.hyunseda.payhyunseda.Payment;
 import java.util.ArrayList;
 
 import java.util.List;
@@ -209,7 +209,9 @@ public class GUICarrito extends javax.swing.JFrame implements IOberver{
             if (tblProducts.isRowSelected(i)) {
                 try {
                     //service.findProductById((Long)tblProducts.getValueAt(i, 0));
-                    payService.pay(new Payment());
+                    PaymentStatus instance = new PaymentStatus(payService.pay(new Payment()));
+                    instance.setVisible(true);
+                    
                 } catch (Exception ex) {
                     Logger.getLogger(GUICarrito.class.getName()).log(Level.SEVERE, null, ex);
                 }

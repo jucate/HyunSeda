@@ -1,14 +1,7 @@
-
 package co.com.hyunseda.market.presentation;
-
 import co.com.hyunseda.market.dataAccess.Factory;
 import co.com.hyunseda.market.service.Service;
 import co.com.hyunseda.market.dataAccess.IProductRepository;
-
-/**
- *
- * @author Libardo Pantoja
- */
 public class Main {
 
     /**
