@@ -9,18 +9,17 @@ package co.com.hyunseda.market.presentation;
  * @author USUARIO
  */
 public class PaymentStatus extends javax.swing.JFrame {
-
     /**
      * Creates new form PaymentStatus
      * @param Value
      */
     public PaymentStatus(boolean Value) {
         initComponents();
-        if (Value==true) {
-            this.txtStatusPane.setText("Pago realizado");
+        if (Value == false) {
+            this.txtStatusPane.setText("Pago NO realizado");
         }
         else{
-            this.txtStatusPane.setText("Pago no Realizado");
+            this.txtStatusPane.setText("Pago Realizado");
         }
     }
 

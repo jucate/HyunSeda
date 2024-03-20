@@ -205,18 +205,26 @@ public class GUICarrito extends javax.swing.JFrame implements IOberver{
 
     private void btnPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPagarActionPerformed
         // TODO add your handling code here:
+
         for (int i = 0; i < listProducts.size(); i++) {
             if (tblProducts.isRowSelected(i)) {
+                Payment pago = new Payment();
+                //El valor a fijarse debe tomarse del producto respectivo
+                //Se debe setear el idClient y el idDocumentPayment
+                
+                pago.setPayValue(40000);
                 try {
                     //service.findProductById((Long)tblProducts.getValueAt(i, 0));
-                    PaymentStatus instance = new PaymentStatus(payService.pay(new Payment()));
+                    PaymentStatus instance = new PaymentStatus(payService.pay(pago));
                     instance.setVisible(true);
-                    
+
                 } catch (Exception ex) {
                     Logger.getLogger(GUICarrito.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-        }    
+        }
+
+
     }//GEN-LAST:event_btnPagarActionPerformed
     
 

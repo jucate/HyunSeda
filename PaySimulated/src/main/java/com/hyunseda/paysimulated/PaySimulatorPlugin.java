@@ -13,7 +13,8 @@ import java.util.Scanner;
  * @author USUARIO
  */
 public class PaySimulatorPlugin implements IPaymentPlugin{
-    private double saldo = -1.0;
+    //Este valor junto con las credenciales de pago deben ser leidos desde un archivo
+    private double saldo = 50000;
     private int codigo = 1;
 
     public double getSaldo() {
@@ -34,14 +35,13 @@ public class PaySimulatorPlugin implements IPaymentPlugin{
     @Override
     public boolean payProcessing(Payment payment) {
         //GetFileInfo(payment);
-        if (getSaldo()>0.0) {
-            payment.setPayValue(true);
-            return payment.isPayValue();
+        if (this.saldo>payment.getPayValue()) {            
+            return true;
         } else {
-            return payment.isPayValue();
+            return false;
         }
     }
-    public void GetFileInfo(Payment payment){
+    public void GetFileInfo(){
         File archivo = new File("Pago.txt");
         List<String> listData = new ArrayList<>();
         if(archivo.exists()){
