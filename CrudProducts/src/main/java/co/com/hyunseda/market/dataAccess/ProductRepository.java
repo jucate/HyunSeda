@@ -40,13 +40,14 @@ public class ProductRepository implements IProductRepository {
             }
             //this.connect();
 
-            String sql = "INSERT INTO products ( name, description, categoryId ) "
-                    + "VALUES ( ?, ?, ? )";
+            String sql = "INSERT INTO products ( name, description, categoryId, price ) "
+                    + "VALUES ( ?, ?, ?, ? )";
 
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, newProduct.getName());
             pstmt.setString(2, newProduct.getDescription());
             pstmt.setLong(3, newProduct.getCategoryId());
+            pstmt.setDouble(4, newProduct.getPrice());
             pstmt.executeUpdate();
             //this.disconnect();
             return true;
@@ -96,7 +97,7 @@ public class ProductRepository implements IProductRepository {
                 newProduct.setProductId(rs.getLong("productId"));
                 newProduct.setName(rs.getString("name"));
                 newProduct.setDescription(rs.getString("description"));
-
+                newProduct.setPrice(rs.getDouble("price"));
                 products.add(newProduct);
             }
             //this.disconnect();
@@ -109,18 +110,22 @@ public class ProductRepository implements IProductRepository {
 
     private void initDatabase() {
         // SQL statement for creating a new table
+        
         String sql = "CREATE TABLE IF NOT EXISTS products (\n"
                 + "	productId integer PRIMARY KEY AUTOINCREMENT,\n"
                 + "	name text NOT NULL,\n"
                 + "	description text NULL,\n"
                 + "     categoryId integer NOT NULL,"
+                + "     price number NULL,\n"
                 + "     FOREIGN KEY(categoryId) references categorys(categoryId)\n"
                 + ");";
-
+        
+        //String createProducts = "INSERT INTO products (name,description,categoryId,price) VALUES (Pera,a,1,1000);";
         try {
             this.connect();
             Statement stmt = conn.createStatement();
             stmt.execute(sql);
+            //stmt.execute(createProducts);
             //this.disconnect();
 
         } catch (SQLException ex) {
@@ -224,6 +229,8 @@ public class ProductRepository implements IProductRepository {
                 newProduct.setProductId(rs.getLong("productId"));
                 newProduct.setName(rs.getString("name"));
                 newProduct.setDescription(rs.getString("description"));
+                newProduct.setCategoryId(rs.getLong("categoryId"));
+                newProduct.setPrice(rs.getDouble("price"));
 
 
             }
@@ -251,7 +258,8 @@ public class ProductRepository implements IProductRepository {
                 newProduct.setProductId(rs.getLong("productId"));
                 newProduct.setName(rs.getString("name"));
                 newProduct.setDescription(rs.getString("description"));
-
+                newProduct.setCategoryId(rs.getLong("categoryId"));
+                newProduct.setPrice(rs.getDouble("price"));
 
             }
             //this.disconnect();
@@ -278,7 +286,8 @@ public class ProductRepository implements IProductRepository {
                 newProduct.setProductId(rs.getLong("productId"));
                 newProduct.setName(rs.getString("name"));
                 newProduct.setDescription(rs.getString("description"));
-
+                newProduct.setCategoryId(rs.getLong("categoryId"));
+                newProduct.setPrice(rs.getDouble("price"));
                 newList.add(newProduct);
             }
             //this.disconnect();

@@ -33,13 +33,13 @@ public class GUIProductsFind extends javax.swing.JDialog implements IOberver{
     }
     
     private void initializeTable() {
-        Class rowData[]=new Class[]{java.lang.Boolean.class,java.lang.Object.class,java.lang.Object.class,java.lang.Object.class};
-        boolean columnasEditables[]={true,false,false,false};
+        Class rowData[]=new Class[]{java.lang.Boolean.class,java.lang.Object.class,java.lang.Object.class,java.lang.Object.class,java.lang.Object.class};
+        boolean columnasEditables[]={true,false,false,false,false};
         DefaultTableModel model = new DefaultTableModel(){
             public boolean isCellEditable(int row, int col){return columnasEditables[col];}
             public Class getColumnClass(int index){return rowData[index];}
         };
-        model.setColumnIdentifiers(new String[]{"Seleccionar","Id", "Name", "Description"});
+        model.setColumnIdentifiers(new String[]{"Seleccionar","Id", "Name", "Description","Price"});
         tblProducts.setModel(model);
     }
     
@@ -47,14 +47,14 @@ public class GUIProductsFind extends javax.swing.JDialog implements IOberver{
         private void fillTable(List<Product> listProducts) {
         initializeTable();
         DefaultTableModel model = (DefaultTableModel) tblProducts.getModel();
-        Object rowData[] = new Object[4];//No columnas
+        Object rowData[] = new Object[5];//No columnas
         for (int i = 0; i < listProducts.size(); i++) {
             rdoSelect = null;
             rowData[0]=rdoSelect;
             rowData[1] = listProducts.get(i).getProductId();
             rowData[2] = listProducts.get(i).getName();
             rowData[3] = listProducts.get(i).getDescription();
-            
+            rowData[4] = listProducts.get(i).getPrice();
             model.addRow(rowData);
         }
         
@@ -65,12 +65,13 @@ public class GUIProductsFind extends javax.swing.JDialog implements IOberver{
         DefaultTableModel model = (DefaultTableModel) tblProducts.getModel();
         //DefaultTableModel model = (DefaultTableModel) tblProducts.getModel();
         
-        Object rowData[] = new Object[4];//No columnas
+        Object rowData[] = new Object[5];//No columnas
         rdoSelect = null;
         rowData[0]=rdoSelect;
         rowData[1]=product.getProductId();
         rowData[2]=product.getName();
         rowData[3]=product.getDescription();
+        rowData[4] = product.getPrice();
         model.addRow(rowData);
         }
         

@@ -47,7 +47,7 @@ public class GUICarrito extends javax.swing.JFrame implements IOberver{
         tblProducts.setModel(new javax.swing.table.DefaultTableModel(
                 new Object[][]{},
                 new String[]{
-                    "Id", "Name", "Description", "Cantidad"
+                    "Id", "Name", "Description", "Cantidad","Price"
                 }
         ));
     }
@@ -56,12 +56,13 @@ public class GUICarrito extends javax.swing.JFrame implements IOberver{
         private void fillTable(List<ItemCompra> listProducts) {
         initializeTable();
         DefaultTableModel model = (DefaultTableModel) tblProducts.getModel();
-        Object rowData[] = new Object[4];//No columnas
+        Object rowData[] = new Object[5];//No columnas
         for (int i = 0; i < listProducts.size(); i++) {
             rowData[0] = listProducts.get(i).getProduct().getProductId();
             rowData[1] = listProducts.get(i).getProduct().getName();
             rowData[2] = listProducts.get(i).getProduct().getDescription();
             rowData[3] = listProducts.get(i).getCantidad();
+            rowData[4] = listProducts.get(i).getProduct().getPrice()*listProducts.get(i).getCantidad();
             model.addRow(rowData);
         }
         
@@ -205,14 +206,14 @@ public class GUICarrito extends javax.swing.JFrame implements IOberver{
 
     private void btnPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPagarActionPerformed
         // TODO add your handling code here:
-
         for (int i = 0; i < listProducts.size(); i++) {
             if (tblProducts.isRowSelected(i)) {
+                
                 Payment pago = new Payment();
                 //El valor a fijarse debe tomarse del producto respectivo
                 //Se debe setear el idClient y el idDocumentPayment
                 
-                pago.setPayValue(40000);
+                pago.setPayValue(getTotalPrices());
                 try {
                     //service.findProductById((Long)tblProducts.getValueAt(i, 0));
                     PaymentStatus instance = new PaymentStatus(payService.pay(pago));
@@ -223,10 +224,16 @@ public class GUICarrito extends javax.swing.JFrame implements IOberver{
                 }
             }
         }
-
-
     }//GEN-LAST:event_btnPagarActionPerformed
-    
+    private double getTotalPrices(){
+        double sum=0;
+        for (int i = 0; i < listProducts.size(); i++) {
+            for (int j = 0; j < listProducts.get(i).getCantidad(); j++) {
+                sum=sum+listProducts.get(i).getProduct().getPrice();
+            }       
+        } 
+        return sum;
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

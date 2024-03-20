@@ -55,6 +55,9 @@ public class GUIProducts extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         txtCategoryID = new javax.swing.JTextArea();
+        jLabel5 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        txtPrice = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Productos");
@@ -128,7 +131,7 @@ public class GUIProducts extends javax.swing.JFrame {
         getContentPane().add(pnlSouth, java.awt.BorderLayout.SOUTH);
 
         pnlCenter.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        pnlCenter.setLayout(new java.awt.GridLayout(4, 2));
+        pnlCenter.setLayout(new java.awt.GridLayout(5, 2));
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel1.setText("*Id:");
@@ -170,6 +173,16 @@ public class GUIProducts extends javax.swing.JFrame {
         jScrollPane2.setViewportView(txtCategoryID);
 
         pnlCenter.add(jScrollPane2);
+
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel5.setText("*Price");
+        pnlCenter.add(jLabel5);
+
+        txtPrice.setColumns(20);
+        txtPrice.setRows(5);
+        jScrollPane3.setViewportView(txtPrice);
+
+        pnlCenter.add(jScrollPane3);
 
         getContentPane().add(pnlCenter, java.awt.BorderLayout.CENTER);
 
@@ -304,14 +317,17 @@ public class GUIProducts extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JPanel pnlCenter;
     private javax.swing.JPanel pnlSouth;
     private javax.swing.JTextArea txtCategoryID;
     private javax.swing.JTextArea txtDescription;
     private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtName;
+    private javax.swing.JTextArea txtPrice;
     // End of variables declaration//GEN-END:variables
 
     private void stateNew() {
@@ -339,10 +355,13 @@ public class GUIProducts extends javax.swing.JFrame {
         String description = txtDescription.getText().trim();
         String id = txtCategoryID.getText().trim();
         long ide = Long.parseLong(id);
+        String Price = txtPrice.getText().trim();
+        double price = Double.parseDouble(Price);
         Product newProduct = new Product();
         newProduct.setName(name);
         newProduct.setDescription(description);
         newProduct.setCategoryId(ide);
+        newProduct.setPrice(price);
         if (service.saveProduct(newProduct)) {
             Messages.showMessageDialog("Se grabó con éxito", "Atención");
             cleanControls();

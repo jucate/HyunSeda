@@ -35,9 +35,13 @@ public class PaySimulatorPlugin implements IPaymentPlugin{
     @Override
     public boolean payProcessing(Payment payment) {
         //GetFileInfo(payment);
-        if (this.saldo>payment.getPayValue()) {            
+        if (this.saldo>=payment.getPayValue()) {  
+            System.out.println(this.saldo);
+            System.out.println(payment.getPayValue());
             return true;
         } else {
+            System.out.println(this.saldo);
+            System.out.println(payment.getPayValue());
             return false;
         }
     }

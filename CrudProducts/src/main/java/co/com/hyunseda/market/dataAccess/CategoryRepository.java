@@ -155,10 +155,12 @@ try {
                 + "	categoryId integer PRIMARY KEY AUTOINCREMENT,\n"
                 + "	nameCat text NOT NULL\n"
                 + ");";
+        //String createCategory = "INSERT INTO categorys (nameCat) VALUES (Fruta);";
         try {
             this.connect();
             Statement stmt = conn.createStatement();
             stmt.execute(sql);
+            //stmt.execute(createCategory);
             //this.disconnect();
 
         } catch (SQLException ex) {
