@@ -1,0 +1,4 @@
+co\unicauca\subscriber\deliveryproducts\presentation\GUIDeliveryOffice$1.class
+co\unicauca\subscriber\deliveryproducts\infra\RabbitListener.class
+co\unicauca\subscriber\deliveryproducts\presentation\GUIDeliveryOffice.class
+co\unicauca\subscriber\deliveryproducts\infra\ISubscriber.class
